@@ -5,12 +5,58 @@
 body {
   background-color: beige;
   font-family: 'Ubuntu', sans-serif;
+  height: 100vh;
 }
 
 main {
   margin: auto;
   text-align: center;
   position: relative;
+width: 500px;
+  perspective: 1000px;
+}
+
+
+#card-content {
+  text-align: center;
+  position: relative;
+  transition: transform 3s;
+  background: pink;
+  transform-style: preserve-3d;
+  margin: auto;
+}
+
+ #card-content.over {
+  transform: rotateY(.5turn); /*90deg*/
+}
+
+.card-front, .card-back {
+  padding: 1em;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  height: 100%;
+}
+
+.card-body, #grid > img {
+  transform: translateZ(5rem);
+}
+
+.card-front {
+  display: flex;
+  height: 100%;
+}
+
+.card-back {
+  display: grid;
+  position: absolute;
+  top:0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding-top: 40px;
+  transform: rotateY(.5turn);
+  background: bisque;
+  color: black;
 }
 
 #grid {
@@ -20,14 +66,15 @@ main {
   justify-content: space-between;
   width: 500px;
   background-color: bisque;
-  height: 100%;
   padding: 10px;
+  transform: translateZ(5rem);
 }
 
 #grid > img {
   margin: 0.5em 0;
   transition: all 0.4s ease;
-  width: 110px;
+  width: 105px;
+  /* transform: translateZ(5rem); */
 }
 
 #grid > img:hover {
@@ -40,18 +87,24 @@ main {
 }
 
 #startButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px 10px;
-  background-color: khaki;
+  background-color: rgb(255, 192, 203);
   width: 100px;
+  height: 50px;
   margin: 15px auto;
   font-size: 1.1em;
   transition: all 0.5s ease;
+  transform: translateZ(5rem);
 }
 
 #startButton:hover {
   cursor: pointer;
-  background-color:bisque;
+  background-color:rgba(255, 192, 203, 0.8);
 }
+
 
 @keyframes spin {
     from {

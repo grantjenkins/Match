@@ -73,6 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
   //get message elements
   const message = document.getElementById('message');
 
+  const cardContent = document.getElementById('card-content');
+
   //holds the two cards that are chosen
   let cardsChosen = [];
   //holds the number of matches (1/2 length of cards)
@@ -136,6 +138,8 @@ document.addEventListener("DOMContentLoaded", function() {
       cards.forEach(function(card) {
         card.classList.add('spin');
       })
+
+      cardContent.classList.add('over');
     }
   }
 
@@ -178,6 +182,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //reset the board
     createBoard();
+
+    cardContent.classList.remove('over');
   }
 
   //add click event for the start button
