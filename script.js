@@ -129,8 +129,6 @@ document.addEventListener("DOMContentLoaded", function() {
   let matches = [];
   //holds the number of turns in a game
   let turns = 0;
-  //has the game started yet? used to change the text on the main scene
-  let gameStarted = false;
 
   //create the board
   function createBoard() {
@@ -221,14 +219,9 @@ document.addEventListener("DOMContentLoaded", function() {
       //add class to perform the grid flip animation
       cardContent.classList.add('over');
 
-      //check if game already started and change text
-      if(!gameStarted) {
-        //update the content
-        document.getElementById('card-body-heading').textContent = "Congratulations!!";
-        document.getElementById('card-body-message').textContent = "You completed the game in " + turns + " turns.";
-        //set the game to started
-        gameStarted = true;
-      }
+      //update the content
+      document.getElementById('card-body-heading').textContent = "Congratulations!!";
+      document.getElementById('card-body-message').textContent = "You completed the game in " + turns + " turns.";
     }
   }
 
