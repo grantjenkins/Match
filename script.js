@@ -114,8 +114,10 @@ document.addEventListener("DOMContentLoaded", function() {
   const grid = document.getElementById("grid");
   //get message elements
   const message = document.getElementById('message');
-
+  //get card content element
   const cardContent = document.getElementById('card-content');
+  //get difficulty element
+  const difficultyContent = document.getElementById('current-difficulty')
 
   //number of cards (based on difficulty)
   let numberOfCards = 16; //default to easy
@@ -127,6 +129,8 @@ document.addEventListener("DOMContentLoaded", function() {
   let matches = [];
   //holds the number of turns in a game
   let turns = 0;
+  //has the game started yet? used to change the text on the main scene
+  let gameStarted = false;
 
   //create the board
   function createBoard() {
@@ -151,7 +155,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //randomly sort the game cards array now that we have our list of cards
     cardArray.sort(() => 0.5 - Math.random());
-
 
     //loop through the cards array
     for(let i = 0; i < cardArray.length; i++) {
@@ -182,6 +185,10 @@ document.addEventListener("DOMContentLoaded", function() {
       //if they match then add the ids to the matches array
       matches.push(card1);
       matches.push(card2);
+
+      //spin the two cards that match
+      cards[card1].classList.add('match');
+      cards[card2].classList.add('match');
     }
     else { //if they don't match
       //reset the images for each card to the default block image
@@ -205,12 +212,23 @@ document.addEventListener("DOMContentLoaded", function() {
       //update the message display on the screen
       message.textContent = 'You found them all!';
       //add spin class to all cards so the spin animation runs
+      //and remove match class to remove the current forwards animations
       cards.forEach(function(card) {
+        card.classList.remove('match');
         card.classList.add('spin');
       })
 
       //add class to perform the grid flip animation
       cardContent.classList.add('over');
+
+      //check if game already started and change text
+      if(!gameStarted) {
+        //update the content
+        document.getElementById('card-body-heading').textContent = "Congratulations!!";
+        document.getElementById('card-body-message').textContent = "You completed the game in " + turns + " turns.";
+        //set the game to started
+        gameStarted = true;
+      }
     }
   }
 
@@ -266,6 +284,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //reset the board
     createBoard();
 
+    //turn the board back over to see the cards
     cardContent.classList.remove('over');
   }
 
@@ -276,29 +295,17 @@ document.addEventListener("DOMContentLoaded", function() {
     switch(numberOfCards) {
       case "16":
         cardSize = 105;
+        difficultyContent.textContent = "Difficulty: Easy";
         break;
       case "24":
-        cardSize = 70;
+        cardSize = 80;
+        difficultyContent.textContent = "Difficulty: Medium";
         break;
       case "36":
         cardSize = 70;
+        difficultyContent.textContent = "Difficulty: Hard";
         break;
     }
-
-    /*
-      easy
-      - 16 cards
-      - img size = 105px
-
-      medium
-      - 24 cards
-      - img size = 70px
-
-      hard
-      - 36 cards
-      - img size = 70px
-    */
-    //easy = 16, medium = 24, hard = 36
   }
 
   //add click event for the start button

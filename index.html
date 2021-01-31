@@ -1,38 +1,45 @@
 <!DOCTYPE html>
+<!--
+This game was initial based off a tutorial on YouTube: https://www.freecodecamp.org/news/learn-javascript-by-building-7-games-video-course/
+
+Then I got a bit carried away and added a bunch more stuff including some 3D persepective :)
+
+Heart background css from http://projects.verou.me/css3patterns/#hearts
+-->
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Match</title>
+    <title>Memory Match</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <main>
-      <h1>Match the images</h1>
+      <h1>Memory Match</h1>
       <div id="status">
-        <h2 id="message">Matches: 0, Turns: 0</h2>
+        <h2 id="message">Test your memory skills!!</h2>
       </div>
 
       <div id="card">
-      <div id="card-content">
+      <div id="card-content" class="over">
         <div class="card-front">
           <div id="grid"></div>
         </div>
         <div class="card-back">
           <div class="card-body">
-            <h2>Congratulations!!</h2>
-            <p>You completed the game in <span id="message-turns"></span> turns.</p>
-            <p>Click the difficulty you want below then click on the Replay button.</p>
+            <h2 id="card-body-heading">Welcome</h2>
+            <p id="card-body-message">Try to match the cards in the least amount of turns.</p>
+            <p>Click the difficulty you want below then click on the Start button.</p>
             <div id="buttons">
             <div id="easyButton" class="button" data-cards="16">Easy</div>
             <div id="mediumButton" class="button" data-cards="24">Medium</div>
             <div id="hardButton" class="button" data-cards="36">Hard</div>
           </div>
-          <div id="startButton" class="button">Replay</div>
+          <p id="current-difficulty">Difficulty: Easy</p>
+          <div id="startButton" class="button">Start</div>
           </div>
-          
         </div>    
       </div>      
     </div>
