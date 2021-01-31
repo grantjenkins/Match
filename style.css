@@ -18,7 +18,6 @@ main {
 
 #status {
   padding-bottom: 20px;
-  /* animation: 2s fadeinout ease forwards; */
 }
 
 #card {
@@ -49,7 +48,6 @@ main {
 }
 
 .card-front, .card-back {
-  /* padding: 1em; */
   transform-style: preserve-3d;
   backface-visibility: hidden;
   height: 100%;
@@ -62,7 +60,6 @@ main {
 .card-front {
   display: flex;
   height: 100%;
-  /* background: bisque; */
   transform: translateZ(5rem);
 }
 
@@ -87,7 +84,6 @@ main {
   justify-content: space-between;
   width: 500px;
   background-color: bisque;
-  /* padding: 10px; */
   transform: translateZ(5rem);
   padding: 1em;
 }
@@ -95,8 +91,6 @@ main {
 #grid > img {
   margin: 0.5em 0;
   transition: all 0.4s ease;
-  width: 105px;
-  /* transform: translateZ(5rem); */
 }
 
 #grid > img:hover {
@@ -137,7 +131,6 @@ main {
   background-color:rgba(212, 48, 76, 0.8);
 }
 
-
 @keyframes spin {
     from {
         transform: rotate(0deg) scale(1.0);
@@ -146,15 +139,3 @@ main {
         transform: rotate(360deg) scale(0.8);
     }
 }
-
-/* @keyframes fadeinout {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-} */

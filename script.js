@@ -2,15 +2,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   
   //card array including name and img src
-  const cardArray = [
-    {
-      name: 'gnome',
-      img: 'images/gnome.png'
-    },
-    {
-      name: 'inkscape',
-      img: 'images/inkscape.png'
-    },
+  const cardArrayAll = [
     {
       name: 'gnome',
       img: 'images/gnome.png'
@@ -44,30 +36,80 @@ document.addEventListener("DOMContentLoaded", function() {
       img: 'images/pig.png'
     },
     {
-      name: 'armchair',
-      img: 'images/armchair.png'
+      name: 'apple',
+      img: 'images/apple.png'
     },
     {
-      name: 'firefox',
-      img: 'images/firefox.png'
+      name: 'atom',
+      img: 'images/atom.png'
     },
     {
-      name: 'gimp',
-      img: 'images/gimp.png'
+      name: 'battery',
+      img: 'images/battery.png'
     },
     {
-      name: 'owl',
-      img: 'images/owl.png'
+      name: 'bell',
+      img: 'images/bell.png'
     },
     {
-      name: 'pan',
-      img: 'images/pan.png'
+      name: 'calligr',
+      img: 'images/calligr.png'
     },
     {
-      name: 'pig',
-      img: 'images/pig.png'
+      name: 'shoe',
+      img: 'images/shoe.png'
+    },
+    {
+      name: 'gridiron',
+      img: 'images/gridiron.png'
+    },
+    {
+      name: 'lightbulb',
+      img: 'images/lightbulb.png'
+    },
+    {
+      name: 'meat',
+      img: 'images/meat.png'
+    },
+    {
+      name: 'paint',
+      img: 'images/paint.png'
+    },
+    {
+      name: 'carrot',
+      img: 'images/carrot.png'
+    },
+    {
+      name: 'calendar',
+      img: 'images/calendar.png'
+    },
+    {
+      name: 'jar',
+      img: 'images/jar.png'
+    },
+    {
+      name: 'mypaint',
+      img: 'images/mypaint.png'
+    },
+    {
+      name: 'radio',
+      img: 'images/radio.png'
+    },
+    {
+      name: 'stellarium',
+      img: 'images/stellarium.png'
+    },
+    {
+      name: 'telegram',
+      img: 'images/telegram.png'
+    },
+    {
+      name: 'vlc',
+      img: 'images/vlc.png'
     }
   ];
+  //card array that holds the current game cards
+  let cardArray = [];
   //get grid createElement
   const grid = document.getElementById("grid");
   //get message elements
@@ -75,17 +117,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const cardContent = document.getElementById('card-content');
 
+  //number of cards (based on difficulty)
+  let numberOfCards = 16; //default to easy
+  //card size based in numberOfCards (difficulty)
+  let cardSize = 105;
   //holds the two cards that are chosen
   let cardsChosen = [];
-  //holds the number of matches (1/2 length of cards)
+  //holds the ids of the matched cards
   let matches = [];
   //holds the number of turns in a game
   let turns = 0;
 
   //create the board
   function createBoard() {
-    //randomly sort the cards array
+    //clear the game array ready for adding new cards
+    cardArray.length = 0;
+
+    //randomly sort the ALL cards array
+    cardArrayAll.sort(() => 0.5 - Math.random());
+
+    //get the first n cards from all cards based on difficulty and add to game cards array
+    //need to of each card, so two separate push commands are required
+    for(let i = 0; i < numberOfCards / 2; i++) {
+      cardArray.push({
+        name: cardArrayAll[i].name,
+        img: cardArrayAll[i].img
+      });
+      cardArray.push({
+        name: cardArrayAll[i].name,
+        img: cardArrayAll[i].img
+      });
+    }
+
+    //randomly sort the game cards array now that we have our list of cards
     cardArray.sort(() => 0.5 - Math.random());
+
 
     //loop through the cards array
     for(let i = 0; i < cardArray.length; i++) {
@@ -93,6 +159,8 @@ document.addEventListener("DOMContentLoaded", function() {
       let card = document.createElement('img');
       //set default (initial) block image
       card.setAttribute('src', 'images/blocks.png');
+      //set width of image
+      card.setAttribute('width', cardSize+'px');
       //capture id for each card
       card.setAttribute('data-id', i);
       //set click event for each card to call flipCard function
@@ -201,8 +269,44 @@ document.addEventListener("DOMContentLoaded", function() {
     cardContent.classList.remove('over');
   }
 
+  function setDifficulty() {
+    //set the number of cards to be used 
+    numberOfCards = this.getAttribute('data-cards');
+
+    switch(numberOfCards) {
+      case "16":
+        cardSize = 105;
+        break;
+      case "24":
+        cardSize = 70;
+        break;
+      case "36":
+        cardSize = 70;
+        break;
+    }
+
+    /*
+      easy
+      - 16 cards
+      - img size = 105px
+
+      medium
+      - 24 cards
+      - img size = 70px
+
+      hard
+      - 36 cards
+      - img size = 70px
+    */
+    //easy = 16, medium = 24, hard = 36
+  }
+
   //add click event for the start button
   document.getElementById('startButton').addEventListener('click', resetGame);
+  //add click event for the difficulty buttons
+  document.getElementById('easyButton').addEventListener('click', setDifficulty);
+  document.getElementById('mediumButton').addEventListener('click', setDifficulty);
+  document.getElementById('hardButton').addEventListener('click', setDifficulty);
 
   //create the initial board with the cards
   createBoard();
