@@ -108,7 +108,13 @@ main {
   animation: 1.5s spin alternate infinite;
 }
 
-#startButton {
+#buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,9 +128,13 @@ main {
   transform: translateZ(5rem);
 }
 
-#startButton:hover {
+.button:hover {
   cursor: pointer;
-  background-color:rgba(255, 192, 203, 0.8);
+  background-color:rgba(231, 84, 109, 0.8);
+}
+
+#buttons > div:active {
+  background-color:rgba(212, 48, 76, 0.8);
 }
 
 
