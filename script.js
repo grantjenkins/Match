@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
   //holds the two cards that are chosen
   let cardsChosen = [];
   //holds the number of matches (1/2 length of cards)
-  let matches = 0;
+  let matches = [];
   //holds the number of turns in a game
   let turns = 0;
 
@@ -111,8 +111,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const card2 = cardsChosen[1].id;
     //compare the two cards using their name
     if(cardsChosen[0].name === cardsChosen[1].name) {
-      //if they match then increase the number of matches
-      matches++;
+      //if they match then add the ids to the matches array
+      matches.push(card1);
+      matches.push(card2);
     }
     else { //if they don't match
       //reset the images for each card to the default block image
@@ -127,11 +128,12 @@ document.addEventListener("DOMContentLoaded", function() {
     cardsChosen.length = 0;
 
     //update the number of matches/turns displayed on the screen
-    message.textContent = 'Matches: ' + matches + ', Turns: ' + turns;
+    message.textContent = 'Matches: ' + (matches.length / 2) + ', Turns: ' + turns;
 
-    //if the number of matches is 1/2 length of the cards array
+    //MIGHT NEED TO CHANGE THIS IF GO WITH DIFFUCLTY AND NUMBER OF IMAGES USED
+    //if the number of matches is equal to the number of images
     //1/2 because we only record a single match for TWO cards
-    if(matches === cards.length/2) {
+    if(matches.length === cards.length) {
       //update the message display on the screen
       message.textContent = 'You found them all!';
       //add spin class to all cards so the spin animation runs
@@ -139,12 +141,15 @@ document.addEventListener("DOMContentLoaded", function() {
         card.classList.add('spin');
       })
 
+      //add class to perform the grid flip animation
       cardContent.classList.add('over');
     }
   }
 
   //handles the flipping over of the cards
   function flipCard() {
+    //perform some initial checks to confirm valid card
+
     //only allow two cards to be selected at a once
     if(cardsChosen.length === 2) {
       return;
@@ -152,6 +157,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //get the id of the current card
     let id = this.getAttribute('data-id');
+
+    //only if the cards haven't already been matched
+    if(matches.includes(id)) {
+      return;
+    }
+
+    //ensure that you can't select the same card twice
+    if(cardsChosen.length === 1 && cardsChosen[0].id === id) {
+      return;
+    }
 
     //add the card to the chosen cards array (name and id)
     cardsChosen.push({
@@ -170,10 +185,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function resetGame() {
     //reset number of matches and turns
-    matches = 0, turns = 0;
+    matches.length = 0, turns = 0;
 
     //update the number of matches/turns displayed on the screen
-    message.textContent = 'Matches: ' + matches + ', Turns: ' + turns;
+    message.textContent = 'Matches: 0, Turns: 0';
 
     //clear all the existing images from the grid
     while (grid.firstChild) {
