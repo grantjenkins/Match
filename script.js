@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //1/2 because we only record a single match for TWO cards
     if(matches === cards.length/2) {
       //update the message display on the screen
-      message.textContent = 'Congratulations! You found them all!';
+      message.textContent = 'You found them all!';
       //add spin class to all cards so the spin animation runs
       cards.forEach(function(card) {
         card.classList.add('spin');
